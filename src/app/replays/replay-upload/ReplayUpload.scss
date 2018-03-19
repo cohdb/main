@@ -1,0 +1,27 @@
+@import 'src/scss/variables';
+
+.dbReplayUpload {
+  display: inline-block;
+  height: auto;
+  padding: 15px 30px 15px 30px;
+  color: $material-text-secondary;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 300;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  text-transform: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 6px;
+  border: 1px solid $material-text-secondary;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: $material-text-secondary;
+    color: $material-primary;
+    background-color: $material-text-secondary;
+  }
+}

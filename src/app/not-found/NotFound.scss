@@ -1,0 +1,17 @@
+@import 'src/scss/variables';
+
+.dbNotFound-code {
+  text-align: center;
+  color: $material-accent;
+  font-family: $font-mono;
+  font-size: 7em;
+  margin: 0;
+  padding-top: 100px;
+}
+
+.dbNotFound-info {
+  text-align: center;
+  color: $material-text-secondary;
+  font-size: 1em;
+  margin: 0;
+}

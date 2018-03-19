@@ -1,0 +1,23 @@
+@import 'src/scss/variables';
+
+.dbFooter {
+  height: 60px;
+  line-height: 60px;
+  font-family: $font-homepage;
+  color: $material-primary-ultralight;
+  font-size: 1.2em;
+  font-weight: 300;
+  overflow: hidden;
+
+  a {
+    color: $material-primary-ultralight;
+
+    &:hover, &:focus {
+      color: $material-accent;
+    }
+  }
+}
+
+.dbFooter-brand {
+  font-family: $font-logo;
+}

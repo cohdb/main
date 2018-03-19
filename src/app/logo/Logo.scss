@@ -1,0 +1,7 @@
+@import 'src/scss/variables';
+
+.dbLogo-border {
+  border: 2px solid $material-primary-light;
+  border-radius: 15px;
+  padding: 10px;
+}

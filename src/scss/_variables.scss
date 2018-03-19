@@ -1,0 +1,102 @@
+// _colours.scss
+
+$clr-accent:     #282428;
+$clr-accent-alt: #2e2e2e;
+
+$clr-bg:         #383838;
+$clr-bg-bar:     #f5f3f2;
+$clr-bg-content: #0d0c0d;
+
+$clr-content:    #a1a1a1;
+$clr-main:       #c80a48;
+$clr-neutral:    #fff;
+
+$clr-logo-vvm:   #72c02c;
+
+// material
+// green
+// $material-base: #f5f3f2;
+// $material-primary: #009688;
+// $material-primary-dark: #00796B;
+// $material-primary-light: #B2DFDB;
+// $material-text-icon: #FFFFFF;
+// $material-text-primary: #212121;
+// $material-text-secondary: #727272;
+// $material-accent: #FF9800;
+// $material-divider: #B6B6B6;
+
+// blue
+$material-base: #f5f3f2;
+//$material-base: #252839;
+$material-secondary: #677077;
+// $material-primary: #3F51B5;
+
+// dark blue
+// $material-primary: #252839;
+// $material-primary-light: #41455A;
+// $material-primary-ultralight: #5C6078;
+// $material-primary-dark: #191D33;
+// $material-primary-ultradark: #0D1127;
+
+// dotabuff
+$material-primary: #242F39;
+$material-primary-light: #2E3740;
+$material-primary-ultralight: #5C6078;
+$material-primary-dark: #1C242D;
+$material-primary-ultradark: #0D1127;
+
+//$material-primary-dark: #303F9F;
+//$material-primary-dark: #87A85C;
+//$material-primary-light: #C5CAE9;
+$material-text-icon: #FFFFFF;
+//$material-text-primary: #212121;
+//$material-text-secondary: #727272;
+$material-text-primary: #FFF;
+$material-text-secondary: #b5b5b7;
+$material-text-alternate: #677077;
+// $material-accent: #FF9800;
+$material-accent: #f2b632;
+$material-divider: #B6B6B6;
+
+$clr-allies: #0EBFE9;
+$clr-axis: #FF4500;
+
+$clr-build-unit-opq: #00688B;
+$clr-build-unit: rgba($clr-build-unit-opq, 0.75);
+//$clr-move: rgba(#A62A2A, 0.2);
+
+//$clr-move: rgba(#2F4F4F, 0.5);
+$clr-move-opq: #1C242D;
+$clr-move: rgba($clr-move-opq, 0.25);
+
+//$clr-move: rgba(#4A777A, 0.5);
+//$clr-move: rgba(#FF8000, 0.5);
+$clr-build-structure-opq: #8B4513;
+$clr-build-structure: rgba($clr-build-structure-opq, 0.5);
+
+$clr-misc-opq: #636363;
+$clr-misc: rgba($clr-misc-opq, 0.5);
+
+$clr-upgrade-opq: #00611C;
+$clr-upgrade: rgba($clr-upgrade-opq, 0.5);
+
+$clr-commander-opq: #990099;
+$clr-commander: rgba($clr-commander-opq, 0.5);
+
+$clr-retreat-opq: #A62A2A;
+$clr-retreat: rgba($clr-retreat-opq, 0.5);
+
+$clr-reinforce-opq: #36DBCA;
+$clr-reinforce: rgba($clr-reinforce-opq, 0.25);
+
+$clr-ability-opq: #FBEC5D;
+$clr-ability: rgba($clr-ability-opq, 0.25);
+
+$clr-attack: rgba(#FFA54F, 0.2);
+
+
+
+$font-logo: "Oswald", cursive;
+$font-homepage: "Lato", sans-serif;
+$font-main: "Open Sans", sans-serif;
+$font-mono: "Fira Mono", monospace;

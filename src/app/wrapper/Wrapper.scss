@@ -1,0 +1,16 @@
+@import 'src/scss/variables';
+
+.dbWrapper-layout {
+  background: $material-primary-dark;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dbWrapper-content {
+  flex: 1 0 auto;
+}
+
+.dbWrapper-light {
+  background: $material-primary;
+}

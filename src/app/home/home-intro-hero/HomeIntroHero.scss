@@ -1,0 +1,18 @@
+@import 'src/scss/variables';
+
+.dbHomeIntroHero {
+  color: $material-text-secondary;
+  font-size: 1.9em;
+  font-family: $font-homepage;
+  font-weight: 300;
+
+  p {
+    margin-bottom: 25px;
+  }
+}
+
+.dbHomeIntroHero-cohdb {
+  color: $material-text-primary;
+  font-family: $font-logo;
+  font-weight: 400;
+}

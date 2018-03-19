@@ -1,0 +1,24 @@
+@import 'src/scss/variables';
+
+.dbNav {
+  padding: 0;
+  line-height: 35px;
+
+  a {
+    color: $material-text-primary;
+    padding: 0;
+  }
+}
+
+.dbNav-brand {
+  background-color: $material-accent;
+  color: $material-base;
+  font-family: $font-logo;
+  font-size: 1.7em;
+  font-weight: bold;
+  padding: 0 10px 0 10px;
+}
+
+.dbNav-link {
+  padding: 0;
+}
