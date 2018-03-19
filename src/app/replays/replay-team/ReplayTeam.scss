@@ -1,0 +1,9 @@
+@import '../replay-container/ReplayContainer.scss';
+
+.dbReplayTeam-card {
+  @extend .dbReplayContainer-card
+}
+
+.dbReplayTeam-cardSmall {
+  @extend .dbReplayContainer-cardSmall
+}

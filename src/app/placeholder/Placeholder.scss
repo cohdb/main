@@ -1,0 +1,19 @@
+@import 'src/scss/variables';
+
+.dbPlaceholder {
+  color: transparent;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: dbPlaceholderShimmer;
+  background: linear-gradient(to right, $material-primary 8%, $material-primary-dark 18%, $material-primary 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+
+@keyframes dbPlaceholderShimmer {
+  0%{ background-position: -468px 0; }
+  100%{ background-position: 468px 0; }
+}

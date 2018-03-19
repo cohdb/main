@@ -15,8 +15,8 @@ const SiteNav = ({ currentUser }) => (
         <NavbarBrand className="dbNav-brand" tag="span"><Link to="/" text="cohdb" /></NavbarBrand>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            {!currentUser && <NavLink className="dbNav-link" tag="span"><Link to="/users/auth/steam" text="Sign In with Steam" fa="steam" external /></NavLink>}
-            {currentUser && <NavLink className="dbNav-link" tag="span"><Link to="/" text={`${currentUser.name} (${currentUser.nickname})`} /></NavLink>}
+            {!currentUser.id && <NavLink className="dbNav-link" tag="span"><Link to="/users/auth/steam" text="Sign In with Steam" fa="steam" external /></NavLink>}
+            {currentUser.id && <NavLink className="dbNav-link" tag="span"><Link to="/" text={`${currentUser.name} (${currentUser.nickname})`} /></NavLink>}
           </NavItem>
         </Nav>
       </Navbar>

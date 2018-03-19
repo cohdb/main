@@ -1,0 +1,12 @@
+@import 'src/scss/variables';
+
+.dbReplayContainer-card {
+  background-color: $material-primary-light;
+  color: $material-text-primary;
+  box-shadow: 0 0 3px rgba(10, 10, 10, 0.4);
+  padding: 4px;
+
+  &.dbReplayContainer-cardSmall {
+    font-size: 0.94em;
+  }
+}

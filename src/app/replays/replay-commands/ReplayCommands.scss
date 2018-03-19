@@ -1,0 +1,20 @@
+@import 'src/scss/variables';
+@import '../replay-container/ReplayContainer.scss';
+
+.dbReplayCommands {
+  height: 25px;
+  margin-bottom: 5px;
+}
+
+.dbReplayCommands-timestamp {
+  color: $material-accent;
+  font-family: $font-mono;
+}
+
+.dbReplayCommands-card {
+  @extend .dbReplayContainer-card
+}
+
+.dbReplayCommands-cardSmall {
+  @extend .dbReplayContainer-cardSmall
+}

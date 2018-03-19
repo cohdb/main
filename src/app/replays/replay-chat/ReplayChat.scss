@@ -1,0 +1,25 @@
+@import 'src/scss/variables';
+@import '../replay-container/ReplayContainer.scss';
+
+.dbReplayChat-allies {
+  color: $clr-allies;
+  font-weight: bold;
+}
+
+.dbReplayChat-axis {
+  color: $clr-axis;
+  font-weight: bold;
+}
+
+.dbReplayChat-timestamp {
+  color: $material-accent;
+  font-family: $font-mono;
+}
+
+.dbReplayChat-card {
+  @extend .dbReplayContainer-card
+}
+
+.dbReplayChat-cardSmall {
+  @extend .dbReplayContainer-cardSmall
+}
