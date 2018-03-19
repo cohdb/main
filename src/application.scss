@@ -1,8 +1,13 @@
 @import 'src/scss/variables';
 @import 'src/scss/utilities';
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+a {
+  color: $material-accent;
+  outline: 0;
+  text-decoration: none !important;
+
+  &:hover {
+    color: $material-accent;
+    text-decoration: none !important;
+  }
 }
