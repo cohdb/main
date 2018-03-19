@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import _ from 'lodash';
 
 import { getRequestHeaders, objectToParams } from '../utils/stateHelpers';
-import { extractData, handleQuery, getEntitiesSelector, getQueryScopeSelector } from '../utils/reducerHelpers';
+import { CREATE_ACTION, handleQuery, getEntitiesSelector, getQueryScopeSelector } from '../utils/reducerHelpers';
 
 const INITIAL_STATE = {
   entities: new Map(),
@@ -20,13 +20,15 @@ export const FETCH_PENDING = 'replays/FETCH_PENDING';
 export const FETCH_REJECTED = 'replays/FETCH_REJECTED';
 export const FETCH_FULFILLED = 'replays/FETCH_FULFILLED';
 
-export const replays = (state = INITIAL_STATE, { type, payload, meta }) => {
-  const data = extractData('replays', payload);
-  switch (type) {
+export const replays = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case FETCH_PENDING:
     case FETCH_FULFILLED:
     case FETCH_REJECTED:
-      return handleQuery(type, data, state, meta);
+      return handleQuery(action, 'user', state);
+
+    case CREATE_FULFILLED:
+      return handleQuery(action, 'user', state, CREATE_ACTION);
 
     default:
       return state;
@@ -49,7 +51,8 @@ export const createReplay = (rec) => {
   data.append('rec', rec);
   return {
     type: CREATE,
-    payload: axios.post(getReplayUrl(), data)
+    payload: axios.post(getReplayUrl(), data),
+    meta: { key: getReplayUrl({ id: ':id' }) }
   };
 };
 

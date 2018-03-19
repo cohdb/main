@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import _ from 'lodash';
 
 import { getRequestHeaders, objectToParams } from '../utils/stateHelpers';
-import { extractData, handleQuery, getEntitiesSelector, getQueryScopeSelector } from '../utils/reducerHelpers';
+import { handleQuery, getEntitiesSelector, getQueryScopeSelector } from '../utils/reducerHelpers';
 
 const INITIAL_STATE = {
   entities: new Map(),
@@ -15,13 +15,12 @@ const FETCH_PENDING = 'commands/FETCH_PENDING';
 const FETCH_REJECTED = 'commands/FETCH_REJECTED';
 const FETCH_FULFILLED = 'commands/FETCH_FULFILLED';
 
-export const commands = (state = INITIAL_STATE, { type, payload, meta }) => {
-  const data = extractData('commands', payload);
-  switch (type) {
+export const commands = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case FETCH_PENDING:
     case FETCH_FULFILLED:
     case FETCH_REJECTED:
-      return handleQuery(type, data, state, meta);
+      return handleQuery(action, 'command', state);
 
     default:
       return state;
