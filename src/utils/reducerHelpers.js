@@ -13,12 +13,14 @@ export const getRequestHeaders = () => ({ headers: DEFAULT_HEADERS, data: {} });
 
 export const extractData = (stateName, payload) => {
   let records = new List();
-  if (payload && payload.data) {
-    records = records.concat(new List(payload.data).filter(record => record.type === stateName));
+  if (payload && payload.data && payload.data.data) {
+    const data = Array.isArray(payload.data.data) ? payload.data.data : [payload.data.data];
+    records = records.concat(new List(data).filter(record => record.type === stateName));
   }
 
-  if (payload && payload.includes) {
-    records = records.concat(new List(payload.includes).filter(record => record.type === stateName));
+  if (payload && payload.data && payload.data.included) {
+    const included = Array.isArray(payload.data.included) ? payload.data.included : [payload.data.included];
+    records = records.concat(new List(included).filter(record => record.type === stateName));
   }
 
   return records.map(record => record.attributes);

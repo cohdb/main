@@ -20,7 +20,7 @@ export const chatMessages = (state = INITIAL_STATE, action) => {
     case FETCH_PENDING:
     case FETCH_FULFILLED:
     case FETCH_REJECTED:
-      return handleQuery(action, 'chatMessage', state);
+      return handleQuery(action, 'chat_message', state);
 
     default:
       return state;

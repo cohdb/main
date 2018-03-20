@@ -25,6 +25,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './layout/Layout';
 import NotFound from './not-found/NotFound';
 import Home from './home/Home';
+import ReplayContainer from './replays/replay-container/ReplayContainer';
 
 import './App.css';
 
@@ -34,6 +35,7 @@ const App = ({ store }) => (
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/replays/:id" component={ReplayContainer} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

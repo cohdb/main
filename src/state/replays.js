@@ -25,10 +25,10 @@ export const replays = (state = INITIAL_STATE, action) => {
     case FETCH_PENDING:
     case FETCH_FULFILLED:
     case FETCH_REJECTED:
-      return handleQuery(action, 'user', state);
+      return handleQuery(action, 'replay', state);
 
     case CREATE_FULFILLED:
-      return handleQuery(action, 'user', state, CREATE_ACTION);
+      return handleQuery(action, 'replay', state, CREATE_ACTION);
 
     default:
       return state;

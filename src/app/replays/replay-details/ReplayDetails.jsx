@@ -21,7 +21,7 @@ import { sort, isDefined } from '../../../utils/immutableHelpers';
 import { allFulfilled } from '../../../utils/statusHelpers';
 
 class Replay extends React.PureComponent {
-  setDefaultPlayer = response => this.props.onPlayerChanged(response.value.data.players[0].id);
+  setDefaultPlayer = response => this.props.onPlayerChanged(response.value.data.included[0].id);
 
   render() {
     const {
