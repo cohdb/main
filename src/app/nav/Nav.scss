@@ -1,6 +1,13 @@
 @import 'src/scss/variables';
 
-.dbNav {
+header {
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+nav.dbNav {
   padding: 0;
   line-height: 35px;
 
@@ -8,17 +15,17 @@
     color: $material-text-primary;
     padding: 0;
   }
-}
 
-.dbNav-brand {
-  background-color: $material-accent;
-  color: $material-base;
-  font-family: $font-logo;
-  font-size: 1.7em;
-  font-weight: bold;
-  padding: 0 10px 0 10px;
-}
+  .dbNav-brand {
+    background-color: $material-accent;
+    color: $material-base;
+    font-family: $font-logo;
+    font-size: 1.7em;
+    font-weight: bold;
+    padding: 0 10px 0 10px;
+  }
 
-.dbNav-link {
-  padding: 0;
+  .dbNav-link {
+    padding: 0;
+  }
 }
