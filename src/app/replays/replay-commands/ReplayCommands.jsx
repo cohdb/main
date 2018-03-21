@@ -38,8 +38,8 @@ const rowRenderer = commands => ({ key, index, style }) => {
 
   return (
     <div key={key} style={style}>
-      <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.commandCategory || ALL_CATEGORIES] }}>
-        <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.commandText}
+      <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.command_category || ALL_CATEGORIES] }}>
+        <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.command_text}
       </p>
     </div>
   );
@@ -59,7 +59,7 @@ const CommandList = ({ records }) => (
   </AutoSizer>
 );
 
-class Commands extends React.PureComponent {
+class ReplayCommands extends React.PureComponent {
   state = {
     filter: ALL_CATEGORIES
   };
@@ -71,7 +71,7 @@ class Commands extends React.PureComponent {
     if (filter === ALL_CATEGORIES) {
       return commands;
     } else {
-      return commands.filter(command => command.commandCategory === filter);
+      return commands.filter(command => command.command_category === filter);
     }
   };
 
@@ -86,4 +86,4 @@ class Commands extends React.PureComponent {
   );
 }
 
-export default Commands;
+export default ReplayCommands;

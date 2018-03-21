@@ -47,7 +47,7 @@ const Table = ({ records, status, striped = true, hover = false, size = 'sm', cl
     striped={striped}
     hover={hover}
     size={size}
-    className={className}
+    className={`dbTable ${className}`}
   >
     <thead>
     <tr>

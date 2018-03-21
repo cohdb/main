@@ -20,7 +20,7 @@ import { filterPlayersByFaction } from '../../../utils/playerHelpers';
 import { sort, isDefined } from '../../../utils/immutableHelpers';
 import { allFulfilled } from '../../../utils/statusHelpers';
 
-class Replay extends React.PureComponent {
+class ReplayDetails extends React.PureComponent {
   setDefaultPlayer = response => this.props.onPlayerChanged(response.value.data.included[0].id);
 
   render() {
@@ -88,4 +88,4 @@ const mapStateToProps = (state, ownProps) => createSelector(
   })
 )(state);
 
-export default withRouter(connect(mapStateToProps)(Replay));
+export default withRouter(connect(mapStateToProps)(ReplayDetails));

@@ -14,7 +14,7 @@ const LoadingState = () => (
     <Col xs={12} md={3}>
       <h1><Placeholder>Replay Loading</Placeholder> <small><Placeholder>vLoading</Placeholder></small></h1>
     </Col>
-    <Col xs={12} md={9} className="dbReplaySummary">
+    <Col xs={12} md={9} className="dbReplaySummary-metadata">
       <dl>
         <dd><Placeholder>2v2</Placeholder></dd>
         <dt><Placeholder>MODE</Placeholder></dt>
@@ -44,7 +44,7 @@ const Content = ({ replay, players, user }) => (
     <Col xs={12} md={3}>
       <h1>Replay {replay.id} <small>v{replay.version}</small></h1>
     </Col>
-    <Col xs={12} md={9} className="dbReplaySummary">
+    <Col xs={12} md={9} className="dbReplaySummary-metadata">
       <dl>
         <dd>{formatGameMode(players.count())}</dd>
         <dt>MODE</dt>
@@ -69,13 +69,13 @@ const Content = ({ replay, players, user }) => (
   </Row>
 );
 
-const Summary = ({ replay, players, user, status }) => (
+const ReplaySummary = ({ replay, players, user, status }) => (
   <Wrapper paddingTop={35}>
-    <div className="dbReplaySummary-card dbReplaySummary-cardSmall">
+    <div className="dbReplaySummary-card dbReplaySummary">
       {isFulfilled(status) && <Content replay={replay} players={players} user={user} />}
       {!isFulfilled(status) && <LoadingState />}
     </div>
   </Wrapper>
 );
 
-export default Summary;
+export default ReplaySummary;

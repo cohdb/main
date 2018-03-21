@@ -5,17 +5,52 @@
   @extend .dbReplayContainer-card
 }
 
-.dbReplaySummary-cardSmall {
-  @extend .dbReplayContainer-cardSmall
+.dbReplaySummary {
+  padding: 10px;
+
+  h1 {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  small {
+    color: $material-text-secondary;
+    display: block;
+    font-size: 0.6em;
+  }
+
+  dl {
+    display: inline-block;
+    margin: 0 30px 0 0;
+    text-align: left;
+  }
+
+  @include media-breakpoint-up(md) {
+    dl {
+      margin: 0 0 0 30px;
+    }
+  }
+
+  dd {
+    font-size: 0.8em;
+    margin: 0;
+  }
+
+  dt {
+    color: $material-text-secondary;
+    font-size: 0.6em;
+    font-weight: 400;
+    margin: 0;
+  }
 }
 
-.dbReplaySummary {
+.dbReplaySummary-metadata {
   margin-top: 10px;
   text-align: left;
 }
 
 @include media-breakpoint-up(md) {
-  .dbReplaySummary {
+  .dbReplaySummary-metadata {
     margin-top: 0;
     text-align: right;
   }

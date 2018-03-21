@@ -2,6 +2,11 @@
 @import 'src/scss/variables';
 @import 'src/scss/utilities';
 
+body,
+html {
+  height: 100%;
+}
+
 a {
   color: $material-accent;
   outline: 0;
@@ -10,5 +15,66 @@ a {
   &:hover {
     color: $material-accent;
     text-decoration: none !important;
+  }
+}
+
+dl {
+  &:not(:first-child) {
+    margin: 0 0 0 30px;
+  }
+
+  margin: 0;
+
+  display: inline-block;
+  text-align: left;
+}
+
+dd {
+  font-size: 0.8em;
+  margin: 0;
+}
+
+dt {
+  color: $material-text-secondary;
+  font-size: 0.6em;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.3em;
+  margin: 0;
+}
+
+select {
+  appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: 1px solid $material-primary-light;
+  border-radius: 0;
+  color: $material-text-secondary;
+  display: inline-block;
+  fill: $material-text-secondary;
+  font-size: 0.8em;
+  font-weight: bold;
+  height: 24px;
+  //line-height: 18px;
+  margin: 0 0 0 0;
+  padding: 1px 10px 1px 10px;
+  //vertical-align: middle;
+  width: 100px;
+
+  &:hover {
+    background-color: $material-primary-light;
+    fill: $material-accent;
   }
 }

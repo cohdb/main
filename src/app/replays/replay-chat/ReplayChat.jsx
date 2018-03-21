@@ -35,7 +35,7 @@ const LoadingState = () => (
   </div>
 );
 
-class Chat extends React.PureComponent {
+class ReplayChat extends React.PureComponent {
   cache = new CellMeasurerCache({
     fixedWidth: true,
     minHeight: 25
@@ -43,7 +43,7 @@ class Chat extends React.PureComponent {
 
   rowRenderer = (messages, players) => ({ key, index, parent, style }) => {
     const record = messages.get(index, {});
-    const player = players.get(record.playerId, {});
+    const player = players.get(record.player_id, {});
 
     return (
       <CellMeasurer
@@ -87,4 +87,4 @@ class Chat extends React.PureComponent {
   };
 }
 
-export default Chat;
+export default ReplayChat;
