@@ -50,7 +50,7 @@ const Content = ({ replay, players, user }) => (
         <dt>MODE</dt>
       </dl>
       <dl>
-        <dd>{replay.mapName}</dd>
+        <dd>{replay.map_name}</dd>
         <dt>MAP</dt>
       </dl>
       <dl>
@@ -58,7 +58,7 @@ const Content = ({ replay, players, user }) => (
         <dt>LENGTH</dt>
       </dl>
       <dl>
-        <dd>{formatTimeAgo(replay.createdAt)}</dd>
+        <dd>{formatTimeAgo(replay.created_at)}</dd>
         <dt>UPLOADED</dt>
       </dl>
       <dl>
