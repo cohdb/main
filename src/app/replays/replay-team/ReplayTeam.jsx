@@ -18,9 +18,9 @@ const ReplayTeam = ({ faction, players, status }) => {
       <div className="dbReplayTeam-card dbReplayTeam-cardSmall">
         <Table records={players} status={status} className={stripedClass}>
           {{ dataKey: 'faction', label: '', style: { width: 32, textAlign: 'center' }, cellRenderer: factionFlagRenderer }}
-          {{ dataKey: 'name', label: 'Name', style: { width: 200 }, cellRenderer: playerCardLinkRenderer('steamId') }}
-          {{ dataKey: 'steamAvatarUrl', label: '', style: { width: 32 }, cellRenderer: steamProfileAvatarRenderer('steamId') }}
-          {{ dataKey: 'commanderName', label: 'Commander', style: { width: 275 } }}
+          {{ dataKey: 'name', label: 'Name', style: { width: 200 }, cellRenderer: playerCardLinkRenderer('steam_id') }}
+          {{ dataKey: 'steam_avatar_url', label: '', style: { width: 32 }, cellRenderer: steamProfileAvatarRenderer('steam_id') }}
+          {{ dataKey: 'commander_name', label: 'Commander', style: { width: 275 } }}
           {{ dataKey: 'cpm', label: 'CPM', style: { width: 64, textAlign: 'right' }, cellRenderer: decimalRenderer(2) }}
           {{ dataKey: 'items', label: 'Items' }}
         </Table>

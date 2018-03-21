@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import './application.css';
 import App from './app/App';
+import './application.css';
 import store from './store/index';
 import registerServiceWorker from './registerServiceWorker';
 
