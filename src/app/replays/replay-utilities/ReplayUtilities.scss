@@ -1,0 +1,13 @@
+@import '../replay-container/ReplayContainer.scss';
+
+.dbReplayUtilities {
+  padding: 10px;
+}
+
+.dbReplayUtilities-card {
+  @extend .dbReplayContainer-card
+}
+
+.dbReplayUtilities-cardSmall {
+  @extend .dbReplayContainer-cardSmall
+}
