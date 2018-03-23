@@ -13,6 +13,7 @@ import QueryReplays from '../../queries/QueryReplays';
 import QueryChatMessages from '../../queries/QueryChatMessages';
 import QueryCommands from '../../queries/QueryCommands';
 import ReplaySummary from '../replay-summary/ReplaySummary';
+import ReplayUtilities from '../replay-utilities/ReplayUtilities';
 import ReplayTeam from '../replay-team/ReplayTeam';
 import ReplayChat from '../replay-chat/ReplayChat';
 import ReplayCommands from '../replay-commands/ReplayCommands';
@@ -48,6 +49,10 @@ class ReplayDetails extends React.PureComponent {
           status={replay.status}
           user={uploadingUser}
         />
+        <ReplayUtilities
+          replay={replay.content}
+          status={replay.status}
+        />
         <ReplayTeam
           faction={ALLIES}
           players={alliesPlayers}
@@ -63,7 +68,13 @@ class ReplayDetails extends React.PureComponent {
           players={playerEntities.content}
           status={allFulfilled(chatMessages.status, players.status)}
         />
-        <ReplayCommands commands={commands.content} status={commands.status} />
+        <ReplayCommands
+          commands={commands.content}
+          players={players.content}
+          status={allFulfilled(commands.status, players.status)}
+          selected={playerId}
+          onPlayerChanged={this.props.onPlayerChanged}
+        />
       </div>
     );
   }
