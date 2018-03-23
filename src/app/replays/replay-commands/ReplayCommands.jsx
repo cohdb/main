@@ -30,7 +30,6 @@ const LoadingState = () => (
     <div><Placeholder>[99:99:99] Inverse: I have to cancel a photo op with a goat.</Placeholder></div>
     <div><Placeholder>[99:99:99] Inverse: It's a real struggle ain't it?</Placeholder></div>
     <div><Placeholder>[99:99:99] Inverse: Tough beat everybody.</Placeholder></div>
-    <div><Placeholder>[99:99:99] Inverse: Thanks for the work.</Placeholder></div>
   </div>
 );
 
