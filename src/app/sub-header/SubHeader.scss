@@ -1,4 +1,6 @@
 .dbSubHeader {
+  display: flex;
+  align-items: flex-end;
   padding: 5px;
 
   h2 {
@@ -7,6 +9,14 @@
     margin: 0;
     color: white;
   }
+}
+
+.dbSubHeader-title {
+  flex: 1;
+}
+
+.dbSubHeader-content {
+  color: white;
 }
 
 .dbSubHeader-shadow {
