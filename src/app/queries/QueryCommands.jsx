@@ -5,17 +5,17 @@ import _ from 'lodash';
 import { fetchCommands } from '../../state/commands';
 
 class QueryCommands extends React.PureComponent {
-  componentDidMount = () => this.query();
+  componentDidMount = () => this.query(this.props);
 
   componentWillReceiveProps(nextProps) {
     if (this.props.playerId === nextProps.playerId) {
       return;
     }
 
-    this.query();
+    this.query(nextProps);
   }
 
-  query = () => this.props.dispatch(fetchCommands(_.omit(this.props, 'dispatch')));
+  query = props => this.props.dispatch(fetchCommands(_.omit(props, 'dispatch')));
 
   render = () => null;
 }

@@ -5,17 +5,17 @@ import _ from 'lodash';
 import { fetchChatMessages } from '../../state/chatMessages';
 
 class QueryChatMessages extends React.PureComponent {
-  componentDidMount = () => this.query();
+  componentDidMount = () => this.query(this.props);
 
   componentWillReceiveProps(nextProps) {
     if (this.props.replayId === nextProps.replayId) {
       return;
     }
 
-    this.query();
+    this.query(nextProps);
   }
 
-  query = () => this.props.dispatch(fetchChatMessages(_.omit(this.props, 'dispatch')));
+  query = props => this.props.dispatch(fetchChatMessages(_.omit(props, 'dispatch')));
 
   render = () => null;
 }
