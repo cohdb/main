@@ -11,6 +11,7 @@ table.dbTable {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    vertical-align: middle;
   }
 
   &.table-striped.dbTable-stripedBlue tbody tr:nth-of-type(odd) {
