@@ -2,6 +2,14 @@
 @import 'src/scss/variables';
 @import 'src/scss/utilities';
 
+$select-item-gutter: 2px;
+$select-input-height: 24px;
+@import "../node_modules/react-select/scss/default";
+
+.Select {
+  font-size: 13px;
+}
+
 body,
 html {
   height: 100%;
