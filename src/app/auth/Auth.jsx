@@ -11,20 +11,6 @@ import { fetchMyUser } from '../../state/users';
 
 import './Auth.css';
 
-const Redirecting = () => (
-  <div className="dbAuth-content">
-    <SteamLogo color="#f2b632" border />
-    <p className="dbAuth-text">Redirecting to Steam...</p>
-  </div>
-);
-
-const Login = () => (
-  <div className="dbAuth-content">
-    <SteamLogo color="#f2b632" border />
-    <p className="dbAuth-text">Logging you in...</p>
-  </div>
-);
-
 class Auth extends React.PureComponent {
   state = {
     redirect: false
@@ -46,8 +32,10 @@ class Auth extends React.PureComponent {
   render = () => (
     <Wrapper>
       {this.state.redirect && <Redirect to="/" />}
-      {!this.getLoginToken() && <Redirecting />}
-      {this.getLoginToken() && <Login />}
+      <div className="dbAuth-content">
+        <SteamLogo color="#f2b632" border />
+        <p className="dbAuth-text">{this.getLoginToken() ? 'Logging you in...' : 'Redirecting to Steam...'}</p>
+      </div>
     </Wrapper>
   );
 }
