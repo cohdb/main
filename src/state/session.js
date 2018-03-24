@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
 import axios from 'axios';
 
-import { getUserEntities } from './users';
+import { FETCH_ME_FULFILLED, getUserEntities } from './users';
+import { extractData } from '../utils/reducerHelpers';
 
 const INITIAL_STATE = {
   id: null,
@@ -17,6 +18,10 @@ const session = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case FETCH_ACCESS_TOKEN_FULFILLED:
       return { ...state, accessToken: extractTokenFromPayload(payload) };
+
+    case FETCH_ME_FULFILLED:
+      const data = extractData('user', payload);
+      return { ...state, id: data.get(0, {}).id };
 
     default:
       return state;
