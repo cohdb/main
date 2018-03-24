@@ -1,0 +1,15 @@
+@import 'src/scss/variables';
+
+.dbAuth-content {
+  text-align: center;
+  margin: 0;
+  padding-top: 100px;
+}
+
+.dbAuth-text {
+  color: $material-text-primary;
+  font-family: $font-mono;
+  font-size: 2em;
+  margin: 0;
+  padding-top: 80px;
+}
