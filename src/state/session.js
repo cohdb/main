@@ -45,8 +45,15 @@ export const fetchAccessToken = token => ({
 });
 
 export const loadAccessTokenFromStorage = () => ({
-  type: FETCH_ACCESS_TOKEN_FULFILLED,
-  payload: JSON.parse(localStorage.getItem('accessToken'))
+  type: FETCH_ACCESS_TOKEN,
+  payload: new Promise((resolve, reject) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      resolve(JSON.parse(token));
+    } else {
+      reject('No token found!');
+    }
+  })
 });
 
 // SELECTORS
