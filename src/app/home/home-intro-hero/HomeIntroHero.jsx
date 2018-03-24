@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import Wrapper from '../../wrapper/Wrapper';
-import Logo from '../../logo/Logo';
+import SiteLogo from '../../logos/SiteLogo';
 import ReplayUpload from '../../replays/replay-upload/ReplayUpload';
 
 import './HomeIntroHero.css';
@@ -11,7 +11,7 @@ const HomeIntroHero = () => (
   <Wrapper light paddingTop={50} paddingBottom={25} className="dbHomeIntroHero">
     <Row>
       <Col className="text-center">
-        <Logo color="#f2b632" border />
+        <SiteLogo color="#f2b632" border />
       </Col>
     </Row>
     <Row>
