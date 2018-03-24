@@ -27,11 +27,21 @@ export default session;
 
 const AUTH_URL = '/auth';
 
-export const extractTokenFromPayload = payload => payload.data.data.attributes.token;
+export const extractTokenFromPayload = payload =>
+  payload &&
+  payload.data &&
+  payload.data.data &&
+  payload.data.data.attributes &&
+  payload.data.data.attributes.token;
 
 export const fetchAccessToken = token => ({
   type: FETCH_ACCESS_TOKEN,
   payload: axios.post(AUTH_URL, { login_token: token })
+});
+
+export const loadAccessTokenFromStorage = () => ({
+  type: FETCH_ACCESS_TOKEN_FULFILLED,
+  payload: JSON.parse(localStorage.getItem('accessToken'))
 });
 
 // SELECTORS

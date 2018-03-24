@@ -5,6 +5,7 @@ import { FETCH_ACCESS_TOKEN_FULFILLED, extractTokenFromPayload } from '../state/
 const updateAuth = state => next => (action) => {
   if (action.type === FETCH_ACCESS_TOKEN_FULFILLED) {
     axios.defaults.headers['Authorization'] = (action.payload ? `Bearer ${extractTokenFromPayload(action.payload)}` : undefined);
+    localStorage.setItem('accessToken', JSON.stringify(action.payload));
   }
 
   next(action);
