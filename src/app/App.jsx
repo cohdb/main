@@ -8,11 +8,14 @@ import Home from './home/Home';
 import Auth from './auth/Auth';
 import ReplayContainer from './replays/replay-container/ReplayContainer';
 import { loadAccessTokenFromStorage } from '../state/session';
+import { fetchMyUser } from '../state/users';
 
 import './App.css';
 
 class App extends React.Component {
-  componentWillMount = () => this.props.dispatch(loadAccessTokenFromStorage());
+  componentWillMount = () =>
+    this.props.dispatch(loadAccessTokenFromStorage())
+      .then(() => this.props.dispatch(fetchMyUser()));
 
   render = () => (
     <Provider store={this.props.store}>
