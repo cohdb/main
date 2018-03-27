@@ -5,3 +5,24 @@
   border-radius: 15px;
   padding: 10px;
 }
+
+.dbLogo-pulse {
+  fill: $material-accent;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    fill: $material-accent;
+  }
+
+  50% {
+    fill: $material-primary-light;
+  }
+
+  100% {
+    fill: $material-accent;
+  }
+}
+
+
