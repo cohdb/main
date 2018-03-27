@@ -3,14 +3,14 @@ import { Container } from 'reactstrap';
 
 import './Wrapper.css';
 
-const LayoutWrapper = ({ children }) => (
-  <div className="dbWrapper-layout">
+const LayoutWrapper = ({ children, className }) => (
+  <div className={`dbWrapper-layout ${className}`}>
     {children}
   </div>
 );
 
-const ContentWrapper = ({ children }) => (
-  <div className="dbWrapper-content">
+const ContentWrapper = ({ children, className }) => (
+  <div className={`dbWrapper-content ${className}`}>
     {children}
   </div>
 );
