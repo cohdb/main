@@ -39,9 +39,9 @@ export const extractTokenFromPayload = payload =>
   payload.data.data.attributes &&
   payload.data.data.attributes.token;
 
-export const fetchAccessToken = token => ({
+export const fetchAccessToken = login_token => ({
   type: FETCH_ACCESS_TOKEN,
-  payload: axios.post(AUTH_URL, { login_token: token })
+  payload: axios.post(AUTH_URL, { login_token })
 });
 
 export const loadAccessTokenFromStorage = () => ({
