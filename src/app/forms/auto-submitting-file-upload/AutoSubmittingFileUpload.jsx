@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { createReplay } from '../../../state/replays';
+import { currentUserSelector } from '../../../state/session';
 
 import './AutoSubmittingFileUpload.css';
 
@@ -15,8 +16,8 @@ class AutoSubmittingFileInput extends React.PureComponent {
   onChange = event => this.props.handleSubmit(_ => this.handleUpload(event.target.files[0]))();
 
   handleUpload = rec =>
-    this.props.dispatch(createReplay(rec))
-      .then(response => this.props.history.push(`/replays/${response.value.data.replays[0].id}`))
+    this.props.dispatch(createReplay(rec, this.props.currentUser))
+      .then(response => this.props.history.push(`/replays/${response.value.data.data.id}`))
       .catch(() => console.warn('error'));
 
   render() {
@@ -27,4 +28,6 @@ class AutoSubmittingFileInput extends React.PureComponent {
   }
 }
 
-export default withRouter(connect(null)(AutoSubmittingFileInput));
+const mapStateToProps = state => currentUserSelector(state);
+
+export default withRouter(connect(mapStateToProps)(AutoSubmittingFileInput));
