@@ -1,19 +1,23 @@
 import { PENDING_STATUS, FULFILLED_STATUS, REJECTED_STATUS } from './constants';
 
-export const isFulfilled = status => status === FULFILLED_STATUS;
+export const isPending = status => status.name === PENDING_STATUS;
+
+export const isFulfilled = status => status.name === FULFILLED_STATUS;
+
+export const isRejected = status => status.name === REJECTED_STATUS;
 
 export const allFulfilled = (...statuses) => {
   if (statuses.length === 0) {
-    return FULFILLED_STATUS;
+    return { name: FULFILLED_STATUS };
   }
 
-  if (statuses.every(status => status === FULFILLED_STATUS)) {
-    return FULFILLED_STATUS;
+  if (statuses.every(status => status.name === FULFILLED_STATUS)) {
+    return { name: FULFILLED_STATUS };
   }
 
-  if (statuses.some(status => status === REJECTED_STATUS)) {
-    return REJECTED_STATUS;
+  if (statuses.some(status => status.name === REJECTED_STATUS)) {
+    return { name: REJECTED_STATUS };
   }
 
-  return PENDING_STATUS;
+  return { name: PENDING_STATUS };
 };
