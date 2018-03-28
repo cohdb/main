@@ -9,6 +9,8 @@ import { getReplayPlayers, getPlayerEntities } from '../../../state/players';
 import { getChatMessages } from '../../../state/chatMessages';
 import { getCommands } from '../../../state/commands';
 import { getUserEntities } from '../../../state/users';
+import Error from '../../error/Error';
+import Overlay from '../../overlay/Overlay';
 import QueryReplays from '../../queries/QueryReplays';
 import QueryChatMessages from '../../queries/QueryChatMessages';
 import QueryCommands from '../../queries/QueryCommands';
@@ -19,7 +21,7 @@ import ReplayChat from '../replay-chat/ReplayChat';
 import ReplayCommands from '../replay-commands/ReplayCommands';
 import { filterPlayersByFaction } from '../../../utils/playerHelpers';
 import { sort, isDefined } from '../../../utils/immutableHelpers';
-import { allFulfilled } from '../../../utils/statusHelpers';
+import {allFulfilled, isFulfilled, isPending, isRejected} from '../../../utils/statusHelpers';
 
 class ReplayDetails extends React.PureComponent {
   setDefaultPlayer = response => this.props.onPlayerChanged(response.value.data.included[0].id);
@@ -43,38 +45,44 @@ class ReplayDetails extends React.PureComponent {
         <QueryReplays id={match.params.id} onSuccess={this.setDefaultPlayer} />
         <QueryChatMessages replayId={match.params.id} />
         {isDefined(playerId) && <QueryCommands playerId={playerId} />}
-        <ReplaySummary
-          replay={replay.content}
-          players={players.content}
-          status={replay.status}
-          user={uploadingUser}
-        />
-        <ReplayUtilities
-          replay={replay.content}
-          status={replay.status}
-        />
-        <ReplayTeam
-          faction={ALLIES}
-          players={alliesPlayers}
-          status={replay.status}
-        />
-        <ReplayTeam
-          faction={AXIS}
-          players={axisPlayers}
-          status={replay.status}
-        />
-        <ReplayChat
-          messages={chatMessages.content}
-          players={playerEntities.content}
-          status={allFulfilled(chatMessages.status, players.status)}
-        />
-        <ReplayCommands
-          commands={commands.content}
-          players={players.content}
-          status={allFulfilled(commands.status, players.status)}
-          selected={playerId}
-          onPlayerChanged={this.props.onPlayerChanged}
-        />
+        {isRejected(replay.status) && <Error code={replay.status.statusCode} message={replay.status.statusText} />}
+        {isPending(replay.status) && <Overlay />}
+        {isFulfilled(replay.status) &&
+          <React.Fragment>
+            <ReplaySummary
+              replay={replay.content}
+              players={players.content}
+              status={replay.status}
+              user={uploadingUser}
+            />
+            <ReplayUtilities
+              replay={replay.content}
+              status={replay.status}
+            />
+            <ReplayTeam
+              faction={ALLIES}
+              players={alliesPlayers}
+              status={replay.status}
+            />
+            <ReplayTeam
+              faction={AXIS}
+              players={axisPlayers}
+              status={replay.status}
+            />
+            <ReplayChat
+              messages={chatMessages.content}
+              players={playerEntities.content}
+              status={allFulfilled(chatMessages.status, players.status)}
+            />
+            <ReplayCommands
+              commands={commands.content}
+              players={players.content}
+              status={allFulfilled(commands.status, players.status)}
+              selected={playerId}
+              onPlayerChanged={this.props.onPlayerChanged}
+            />
+          </React.Fragment>
+        }
       </React.Fragment>
     );
   }
