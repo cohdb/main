@@ -40,7 +40,7 @@ class App extends React.Component {
   render = () => (
     <Provider store={this.props.store}>
       <React.Fragment>
-        {!this.state.authFinished && <Overlay />}
+        {!this.state.authFinished && <Overlay full />}
         {this.state.authFinished && <Routes />}
       </React.Fragment>
     </Provider>
