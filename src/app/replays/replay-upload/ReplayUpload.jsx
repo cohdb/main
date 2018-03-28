@@ -11,7 +11,7 @@ const UploadButton = ({ submitting, error, submitSucceeded }) => {
   if (submitting) {
     content = <span><i className="fa fa-circle-o-notch fa-spin" /> Parsing...</span>;
   } else if (error) {
-    content = <span><i className="fa fa-close" /> Error!</span>;
+    content = <span><i className="fa fa-close" /> {error}</span>;
   } else if (submitSucceeded) {
     content = <span><i className="fa fa-check" /> Success!</span>;
   } else {
