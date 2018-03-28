@@ -44,15 +44,19 @@ export const handleQuery = ({ type, payload, meta }, model, state, actionType = 
   let entities = state.entities;
   let key = meta.key;
   const data = extractData(model, payload);
+  const response = payload && (payload.data || payload.request);
+  const statusCode = response && response.status;
+  const statusText = response && response.statusText;
+  const errors = response && response.data && response.data.errors;
 
   if (type.includes(PENDING_STATUS)) {
-    scope = { ...queries.get(key, INIT_QUERY_STATE), status: PENDING_STATUS };
+    scope = { ...queries.get(key, INIT_QUERY_STATE), status: { name: PENDING_STATUS, statusCode } };
     queries = queries.set(key, scope);
   } else if (type.includes(REJECTED_STATUS)) {
-    scope = { ...queries.get(key, INIT_QUERY_STATE), status: REJECTED_STATUS };
+    scope = { ...queries.get(key, INIT_QUERY_STATE), status: { name: REJECTED_STATUS, statusCode, statusText, errors } };
     queries = queries.set(key, scope);
   } else {
-    scope = { ...queries.get(key, INIT_QUERY_STATE), status: FULFILLED_STATUS };
+    scope = { ...queries.get(key, INIT_QUERY_STATE), status: { name: FULFILLED_STATUS, statusCode } };
     if (actionType === CREATE_ACTION) {
       scope = { ...scope, ids: extractIds(data) };
       key = key.replace(':id', scope.ids.first());
