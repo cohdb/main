@@ -39,7 +39,7 @@ class ReplayDetails extends React.PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         <QueryReplays id={match.params.id} onSuccess={this.setDefaultPlayer} />
         <QueryChatMessages replayId={match.params.id} />
         {isDefined(playerId) && <QueryCommands playerId={playerId} />}
@@ -75,7 +75,7 @@ class ReplayDetails extends React.PureComponent {
           selected={playerId}
           onPlayerChanged={this.props.onPlayerChanged}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

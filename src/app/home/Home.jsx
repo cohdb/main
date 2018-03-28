@@ -6,10 +6,10 @@ import HomeInfoContainer from './home-info-container/HomeInfoContainer';
 import './Home.css';
 
 const Home = () => (
-  <div>
+  <React.Fragment>
     <HomeIntroHero />
     <HomeInfoContainer />
-  </div>
+  </React.Fragment>
 );
 
 export default Home;
