@@ -4,7 +4,7 @@ import { DEFAULT_HEADERS, INIT_STATUS } from './constants';
 
 export const INIT_QUERY_STATE = {
   ids: new List(),
-  status: INIT_STATUS
+  status: { name: INIT_STATUS }
 };
 
 export const constructQuery = (...components) => components.join('/');
