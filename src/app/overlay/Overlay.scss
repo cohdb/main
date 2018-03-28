@@ -1,4 +1,7 @@
+@import 'src/scss/variables';
+
 %dbOverlay-base {
+  background: $material-primary-dark;
   display: flex;
   align-items: center;
   justify-content: center;
