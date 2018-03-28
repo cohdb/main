@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { SubmissionError } from 'redux-form';
 
 import { createReplay } from '../../../state/replays';
 import { currentUserSelector } from '../../../state/session';
@@ -18,7 +19,7 @@ class AutoSubmittingFileInput extends React.PureComponent {
   handleUpload = rec =>
     this.props.dispatch(createReplay(rec, this.props.currentUser))
       .then(response => this.props.history.push(`/replays/${response.value.data.data.id}`))
-      .catch(() => console.warn('error'));
+      .catch(() => { throw new SubmissionError({ _error: 'Error, please try again' }) });
 
   render() {
     const { input, hidden } = this.props;
