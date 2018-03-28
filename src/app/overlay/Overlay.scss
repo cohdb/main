@@ -1,5 +1,15 @@
-.dbOverlay {
+%dbOverlay-base {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dbOverlay {
+  @extend %dbOverlay-base;
+  height: calc(100vh - 95px);
+}
+
+.dbOverlay-full {
+  @extend %dbOverlay-base;
+  height: 100vh;
 }

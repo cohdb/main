@@ -1,14 +1,13 @@
 import React from 'react';
 
-import Wrapper from '../wrapper/Wrapper';
 import SiteLogo from '../logos/SiteLogo';
 
 import './Overlay.css';
 
-const Overlay = () => (
-  <Wrapper layout className="dbOverlay">
+const Overlay = ({ full = false }) => (
+  <div className={full ? 'dbOverlay-full' : 'dbOverlay'}>
     <SiteLogo pulse />
-  </Wrapper>
+  </div>
 );
 
 export default Overlay;
