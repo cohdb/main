@@ -89,7 +89,7 @@ const mapStateToProps = (state, ownProps) => createSelector(
   getPlayerEntities,
   (replays, players, chatMessages, commands, users, playerEntities) => ({
     replay: { content: replays.content.first(), status: replays.status },
-    uploadingUser: users.content.get(replays.content.first() && replays.content.first().id, { nickname: 'Anonymous' }),
+    uploadingUser: users.content.get(replays.content.first() && replays.content.first().user_id, { nickname: 'Anonymous' }),
     players,
     playerEntities,
     chatMessages: { content: sort(chatMessages.content, 'tick'), status: chatMessages.status },
