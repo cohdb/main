@@ -6,9 +6,9 @@ import './application.css';
 import store from './store/index';
 import registerServiceWorker from './registerServiceWorker';
 
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.responseType = 'json';
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
-ReactDOM.render(<App store={store({}, true)} />, document.getElementById('root'));
+ReactDOM.render(<App store={store({}, process.env.NODE_ENV === 'development')} />, document.getElementById('root'));
 registerServiceWorker();

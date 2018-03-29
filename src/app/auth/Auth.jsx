@@ -23,7 +23,7 @@ class Auth extends React.PureComponent {
         .then(() => this.props.dispatch(fetchMyUser())
           .then(() => this.setState({ redirect: true })));
     } else {
-      window.location.href = 'http://localhost:3000/users/auth/steam';
+      window.location.href = `${process.env.REACT_APP_API_URL}/users/auth/steam`;
     }
   };
 
