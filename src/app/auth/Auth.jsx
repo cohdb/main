@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import qs from 'query-string';
+import qs from 'qs';
 
 import Wrapper from '../wrapper/Wrapper';
 import SteamLogo from '../logos/SteamLogo';
