@@ -35,7 +35,7 @@ class App extends React.Component {
     this.props.dispatch(loadAccessTokenFromStorage())
       .then(() => this.props.dispatch(fetchMyUser()))
       .catch(error => console.warn(error))
-      .finally(() => this.setState({ authFinished: true }));
+      .then(() => this.setState({ authFinished: true }));
   };
 
   render = () => (
