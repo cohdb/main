@@ -34,6 +34,7 @@ class App extends React.Component {
   componentWillMount = () => {
     this.props.dispatch(loadAccessTokenFromStorage())
       .then(() => this.props.dispatch(fetchMyUser()))
+      .catch(error => console.warn(error))
       .finally(() => this.setState({ authFinished: true }));
   };
 
