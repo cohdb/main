@@ -27,7 +27,7 @@ class Auth extends React.PureComponent {
     }
   };
 
-  getLoginToken = () => qs.parse(this.props.location.search).login_token;
+  getLoginToken = () => qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).login_token;
 
   render = () => (
     <Wrapper>
