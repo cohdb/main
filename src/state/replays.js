@@ -49,7 +49,10 @@ export const getReplayUrl = (params = {}) => {
 export const createReplay = (rec, user) => {
   const data = new FormData();
   data.append('replay[rec]', rec);
-  data.append('replay[user_id]', user.id);
+
+  if (user && user.id) {
+    data.append('replay[user_id]', user.id);
+  }
 
   return {
     type: CREATE,
