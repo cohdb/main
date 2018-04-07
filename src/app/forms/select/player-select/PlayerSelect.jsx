@@ -11,6 +11,7 @@ class PlayerSelect extends React.PureComponent {
 
   render = () => (
     <Select
+      className="dbSelect-player"
       options={getOptionsForPlayers(this.props.players)}
       onChange={this.handleChange}
       value={this.props.value}
