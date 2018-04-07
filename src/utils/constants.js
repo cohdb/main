@@ -24,7 +24,7 @@ export const WEHRMACHT = 'german';
 export const ALLIES_FACTIONS = [SOVIET, USF, BRITISH];
 export const AXIS_FACTIONS = [OKW, WEHRMACHT];
 
-export const ALL_CATEGORIES = 'All';
+export const ALL_CATEGORIES = 'All Commands';
 export const MOVEMENT = 'Movement';
 export const UNITS = 'Units';
 export const STRUCTURES = 'Structures';
