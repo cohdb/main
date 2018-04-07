@@ -5,6 +5,7 @@ import Wrapper from '../../wrapper/Wrapper';
 import SubHeader from '../../sub-header/SubHeader';
 import Placeholder from '../../placeholder/Placeholder';
 import PlayerSelect from '../../forms/select/player-select/PlayerSelect';
+import CommandTypeSelect from '../../forms/select/command-type-select/CommandTypeSelect';
 import { isFulfilled } from '../../../utils/statusHelpers';
 import { formatTicks } from '../../../utils/dateTimeHelpers';
 import { ALL_CATEGORIES, COMMAND_CATEGORY_COLOURS } from '../../../utils/constants';
@@ -75,15 +76,23 @@ class ReplayCommands extends React.PureComponent {
     }
   };
 
+  onCommandTypeFilterChanged = filter => this.setState({ filter });
+
   render = () => (
     <Wrapper paddingTop={25}>
       <SubHeader title="Commands" shadow>
         {isFulfilled(this.props.status) &&
-          <PlayerSelect
-            players={this.props.players}
-            value={this.props.selected}
-            onChange={this.props.onPlayerChanged}
-          />}
+          <React.Fragment>
+            <CommandTypeSelect
+              value={this.state.filter}
+              onChange={this.onCommandTypeFilterChanged}
+            />
+            <PlayerSelect
+              players={this.props.players}
+              value={this.props.selected}
+              onChange={this.props.onPlayerChanged}
+            />
+          </React.Fragment>}
       </SubHeader>
       <div className="dbReplayCommands-card dbReplayCommands-cardSmall">
         {!isFulfilled(this.props.status) && <LoadingState />}
