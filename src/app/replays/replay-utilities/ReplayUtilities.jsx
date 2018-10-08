@@ -28,11 +28,11 @@ const Content = ({ replay }) => (
   </Row>
 );
 
-const ReplayUtilities = ({ replay, status }) => (
+const ReplayUtilities = ({ replay, loading }) => (
   <Wrapper paddingTop={35}>
     <div className="dbReplayUtilities-card dbReplayUtilities-cardSmall dbReplayUtilities">
-      {isFulfilled(status) && <Content replay={replay} />}
-      {!isFulfilled(status) && <LoadingState />}
+      {!loading && <Content replay={replay} />}
+      {loading && <LoadingState />}
     </div>
   </Wrapper>
 );

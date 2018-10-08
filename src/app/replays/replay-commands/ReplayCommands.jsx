@@ -35,12 +35,12 @@ const LoadingState = () => (
 );
 
 const rowRenderer = commands => ({ key, index, style }) => {
-  const command = commands.get(index, {});
+  const command = commands[index] || {};
 
   return (
     <div key={key} style={style}>
-      <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.command_category || ALL_CATEGORIES] }}>
-        <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.command_text}
+      <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.commandCategory || ALL_CATEGORIES] }}>
+        <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.commandText}
       </p>
     </div>
   );
@@ -52,7 +52,7 @@ const CommandList = ({ records }) => (
       <List
         height={386}
         width={width}
-        rowCount={records.count()}
+        rowCount={records.length}
         rowHeight={30}
         rowRenderer={rowRenderer(records)}
       />
@@ -72,7 +72,7 @@ class ReplayCommands extends React.PureComponent {
     if (filter === ALL_CATEGORIES) {
       return commands;
     } else {
-      return commands.filter(command => command.command_category === filter);
+      return commands.filter(command => command.commandCategory === filter);
     }
   };
 
@@ -81,7 +81,7 @@ class ReplayCommands extends React.PureComponent {
   render = () => (
     <Wrapper paddingTop={25}>
       <SubHeader title="Commands" shadow>
-        {isFulfilled(this.props.status) &&
+        {!this.props.loading &&
           <React.Fragment>
             <CommandTypeSelect
               value={this.state.filter}
@@ -95,8 +95,8 @@ class ReplayCommands extends React.PureComponent {
           </React.Fragment>}
       </SubHeader>
       <div className="dbReplayCommands-card dbReplayCommands-cardSmall">
-        {!isFulfilled(this.props.status) && <LoadingState />}
-        {isFulfilled(this.props.status) && <CommandList records={this.filteredCommands()} />}
+        {this.props.loading && !this.props.commands && <LoadingState />}
+        {!this.props.loading && this.props.commands && <CommandList records={this.filteredCommands()} />}
       </div>
     </Wrapper>
   );

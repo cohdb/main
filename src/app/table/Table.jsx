@@ -42,7 +42,7 @@ const LoadingBody = ({ columns }) => (
   </tbody>
 );
 
-const Table = ({ records, status, striped = true, hover = false, size = 'sm', className, children }) => (
+const Table = ({ records, loading, striped = true, hover = false, size = 'sm', className, children }) => (
   <BootstrapTable
     striped={striped}
     hover={hover}
@@ -58,8 +58,8 @@ const Table = ({ records, status, striped = true, hover = false, size = 'sm', cl
       }
     </tr>
     </thead>
-    {isFulfilled(status) && <LoadedBody records={records} columns={children} />}
-    {!isFulfilled(status) && <LoadingBody columns={children} />}
+    {!loading && <LoadedBody records={records} columns={children} />}
+    {loading && <LoadingBody columns={children} />}
   </BootstrapTable>
 );
 

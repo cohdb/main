@@ -9,6 +9,8 @@ import { formatGameMode } from '../../../utils/replayHelpers';
 
 import './ReplaySummary.css';
 
+const formatUploaderName = user => (user && user.nickname) || 'Anonymous';
+
 const LoadingState = () => (
   <Row>
     <Col xs={12} md={3}>
@@ -39,18 +41,18 @@ const LoadingState = () => (
   </Row>
 );
 
-const Content = ({ replay, players, user }) => (
+const Content = ({ replay }) => (
   <Row>
     <Col xs={12} md={3}>
       <h1>Replay {replay.id} <small>v{replay.version}</small></h1>
     </Col>
     <Col xs={12} md={9} className="dbReplaySummary-metadata">
       <dl>
-        <dd>{formatGameMode(players.count())}</dd>
+        <dd>{formatGameMode(replay.players.length)}</dd>
         <dt>MODE</dt>
       </dl>
       <dl>
-        <dd>{replay.map_name}</dd>
+        <dd>{replay.mapName}</dd>
         <dt>MAP</dt>
       </dl>
       <dl>
@@ -58,22 +60,22 @@ const Content = ({ replay, players, user }) => (
         <dt>LENGTH</dt>
       </dl>
       <dl>
-        <dd>{formatTimeAgo(replay.created_at)}</dd>
+        <dd>{formatTimeAgo(replay.createdAt)}</dd>
         <dt>UPLOADED</dt>
       </dl>
       <dl>
-        <dd>{user.nickname}</dd>
+        <dd>{formatUploaderName(replay.user)}</dd>
         <dt>UPLOADER</dt>
       </dl>
     </Col>
   </Row>
 );
 
-const ReplaySummary = ({ replay, players, user, status }) => (
+const ReplaySummary = ({ replay, loading }) => (
   <Wrapper paddingTop={35}>
     <div className="dbReplaySummary-card dbReplaySummary">
-      {isFulfilled(status) && <Content replay={replay} players={players} user={user} />}
-      {!isFulfilled(status) && <LoadingState />}
+      {!loading && <Content replay={replay} />}
+      {loading && <LoadingState />}
     </div>
   </Wrapper>
 );

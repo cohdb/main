@@ -42,8 +42,8 @@ class ReplayChat extends React.PureComponent {
   });
 
   rowRenderer = (messages, players) => ({ key, index, parent, style }) => {
-    const record = messages.get(index, {});
-    const player = players.get(record.player_id, {});
+    const record = messages[index] || {};
+    const player = players.find(player => player.id === record.playerId) || {};
 
     return (
       <CellMeasurer
@@ -59,22 +59,22 @@ class ReplayChat extends React.PureComponent {
   };
 
   render = () => {
-    const { messages, players, status } = this.props;
+    const { messages, players, loading } = this.props;
 
     return (
       <Wrapper paddingTop={25}>
         <SubHeader title="Chat" shadow />
         <div className="dbReplayChat-card dbReplayChat-cardSmall">
-          {!isFulfilled(status) && <LoadingState />}
+          {loading && <LoadingState />}
           {
-            isFulfilled(status) &&
+            !loading &&
             <AutoSizer disableHeight>
               {({ width }) => (
                 <List
                   deferredMeasurementCache={this.cache}
-                  height={Math.min(messages.count() * 25, 400)}
+                  height={Math.min(messages.length * 25, 400)}
                   width={width}
-                  rowCount={messages.count()}
+                  rowCount={messages.length}
                   rowHeight={this.cache.rowHeight}
                   rowRenderer={this.rowRenderer(messages, players)}
                 />
