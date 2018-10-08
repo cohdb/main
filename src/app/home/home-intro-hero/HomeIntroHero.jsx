@@ -23,7 +23,7 @@ const HomeIntroHero = () => (
     </Row>
     <Row>
       <Col className="text-center">
-        <ReplayUpload />
+        {/*<ReplayUpload />*/}
       </Col>
     </Row>
   </Wrapper>
