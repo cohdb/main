@@ -24,6 +24,7 @@ import { filterPlayersByFaction } from '../../../utils/playerHelpers';
 import { sort, isDefined } from '../../../utils/immutableHelpers';
 import {allFulfilled, isFulfilled, isPending, isRejected} from '../../../utils/statusHelpers';
 import { REPLAY } from '../../../graphql/queries/replays';
+import { COMMANDS_FOR_PLAYER } from '../../../graphql/queries/commands';
 
 class ReplayDetails extends React.PureComponent {
   state = {
@@ -37,7 +38,7 @@ class ReplayDetails extends React.PureComponent {
     const { playerId } = this.state;
 
     return (
-      <Query query={REPLAY} variables={{ id: match.params.id, playerId, withCommands: !!playerId }}>
+      <Query query={REPLAY} variables={{ id: match.params.id }}>
         {({ loading, errors, data: { replay } }) => {
           if (!playerId && !loading) {
             this.updateSelectedPlayer(replay.players[0].id);
@@ -68,13 +69,17 @@ class ReplayDetails extends React.PureComponent {
                 players={replay && replay.players}
                 loading={loading && !replay}
               />
-              <ReplayCommands
-                commands={replay && replay.commands}
-                players={replay && replay.players}
-                selected={playerId}
-                onPlayerChanged={this.updateSelectedPlayer}
-                loading={loading && (!replay || !replay.commands)}
-              />
+              <Query query={COMMANDS_FOR_PLAYER} variables={{ playerId }} skip={!playerId}>
+                {({ loading: commandLoading, data: commandData }) => (
+                  <ReplayCommands
+                    commands={commandData && commandData.commands}
+                    players={replay && replay.players}
+                    selected={playerId}
+                    onPlayerChanged={this.updateSelectedPlayer}
+                    loading={commandLoading || !playerId}
+                  />
+                )}
+              </Query>
             </React.Fragment>
           );
         }}
