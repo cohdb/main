@@ -95,7 +95,7 @@ class ReplayCommands extends React.PureComponent {
           </React.Fragment>}
       </SubHeader>
       <div className="dbReplayCommands-card dbReplayCommands-cardSmall">
-        {this.props.loading && !this.props.commands && <LoadingState />}
+        {(this.props.loading || !this.props.commands) && <LoadingState />}
         {!this.props.loading && this.props.commands && <CommandList records={this.filteredCommands()} />}
       </div>
     </Wrapper>
