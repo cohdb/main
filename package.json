@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.16",
     "axios": "^0.18.0",
     "bootstrap": "4.0.0",
+    "graphql": "^14.0.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.5",
     "moment": "^2.21.0",
@@ -13,6 +15,7 @@
     "numeral": "^2.0.6",
     "qs": "^6.5.1",
     "react": "^16.2.0",
+    "react-apollo": "^2.2.4",
     "react-dom": "^16.2.0",
     "react-popper": "^0.8.2",
     "react-redux": "^5.0.7",
