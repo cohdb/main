@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { withRouter } from 'react-router';
+import { Query } from 'react-apollo';
 
 import { ALLIES, AXIS } from '../../../utils/constants';
 import { getReplays } from '../../../state/replays';
@@ -22,89 +23,64 @@ import ReplayCommands from '../replay-commands/ReplayCommands';
 import { filterPlayersByFaction } from '../../../utils/playerHelpers';
 import { sort, isDefined } from '../../../utils/immutableHelpers';
 import {allFulfilled, isFulfilled, isPending, isRejected} from '../../../utils/statusHelpers';
+import { REPLAY } from '../../../graphql/queries/replays';
 
 class ReplayDetails extends React.PureComponent {
-  setDefaultPlayer = response => this.props.onPlayerChanged(response.value.data.included[0].id);
+  state = {
+    playerId: null
+  };
 
-  render() {
-    const {
-      match,
-      replay,
-      uploadingUser,
-      players,
-      playerEntities,
-      chatMessages,
-      commands,
-      alliesPlayers,
-      axisPlayers,
-      playerId
-    } = this.props;
+  updateSelectedPlayer = playerId => this.setState({ playerId });
+
+  render = () => {
+    const { match } = this.props;
+    const { playerId } = this.state;
 
     return (
-      <React.Fragment>
-        <QueryReplays id={match.params.id} onSuccess={this.setDefaultPlayer} />
-        <QueryChatMessages replayId={match.params.id} />
-        {isDefined(playerId) && <QueryCommands playerId={playerId} />}
-        {isRejected(replay.status) && <Error code={replay.status.statusCode} message={replay.status.statusText} />}
-        {isPending(replay.status) && <Overlay />}
-        {isFulfilled(replay.status) &&
-          <React.Fragment>
-            <ReplaySummary
-              replay={replay.content}
-              players={players.content}
-              status={replay.status}
-              user={uploadingUser}
-            />
-            <ReplayUtilities
-              replay={replay.content}
-              status={replay.status}
-            />
-            <ReplayTeam
-              faction={ALLIES}
-              players={alliesPlayers}
-              status={replay.status}
-            />
-            <ReplayTeam
-              faction={AXIS}
-              players={axisPlayers}
-              status={replay.status}
-            />
-            <ReplayChat
-              messages={chatMessages.content}
-              players={playerEntities.content}
-              status={allFulfilled(chatMessages.status, players.status)}
-            />
-            <ReplayCommands
-              commands={commands.content}
-              players={players.content}
-              status={allFulfilled(commands.status, players.status)}
-              selected={playerId}
-              onPlayerChanged={this.props.onPlayerChanged}
-            />
-          </React.Fragment>
-        }
-      </React.Fragment>
+      <Query query={REPLAY} variables={{ id: match.params.id, playerId, withCommands: !!playerId }}>
+        {({ loading, errors, data: { replay } }) => {
+          if (!playerId && !loading) {
+            this.updateSelectedPlayer(replay.players[0].id);
+          }
+
+          return (
+            <React.Fragment>
+              <ReplaySummary
+                replay={replay}
+                loading={loading && !replay}
+              />
+              <ReplayUtilities
+                replay={replay}
+                loading={loading && !replay}
+              />
+              <ReplayTeam
+                faction={ALLIES}
+                players={replay && filterPlayersByFaction(replay.players, ALLIES)}
+                loading={loading && !replay}
+              />
+              <ReplayTeam
+                faction={AXIS}
+                players={replay && filterPlayersByFaction(replay.players, AXIS)}
+                loading={loading && !replay}
+              />
+              <ReplayChat
+                messages={replay && replay.chatMessages}
+                players={replay && replay.players}
+                loading={loading && !replay}
+              />
+              <ReplayCommands
+                commands={replay && replay.commands}
+                players={replay && replay.players}
+                selected={playerId}
+                onPlayerChanged={this.updateSelectedPlayer}
+                loading={loading && (!replay || !replay.commands)}
+              />
+            </React.Fragment>
+          );
+        }}
+      </Query>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => createSelector(
-  getReplays({ id: ownProps.match.params.id }),
-  getReplayPlayers({ id: ownProps.match.params.id }),
-  getChatMessages({ replayId: ownProps.match.params.id }),
-  getCommands({ playerId: ownProps.playerId }),
-  getUserEntities,
-  getPlayerEntities,
-  (replays, players, chatMessages, commands, users, playerEntities) => ({
-    replay: { content: replays.content.first(), status: replays.status },
-    uploadingUser: users.content.get(replays.content.first() && replays.content.first().user_id, { nickname: 'Anonymous' }),
-    players,
-    playerEntities,
-    chatMessages: { content: sort(chatMessages.content, 'tick'), status: chatMessages.status },
-    commands: { content: sort(commands.content, 'tick'), status: commands.status },
-    alliesPlayers: filterPlayersByFaction(players.content, ALLIES),
-    axisPlayers: filterPlayersByFaction(players.content, AXIS)
-  })
-)(state);
-
-export default withRouter(connect(mapStateToProps)(ReplayDetails));
+export default withRouter(ReplayDetails);
