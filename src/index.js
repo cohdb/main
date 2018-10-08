@@ -10,5 +10,5 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.responseType = 'json';
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
-ReactDOM.render(<App store={store({}, process.env.NODE_ENV === 'development')} />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
