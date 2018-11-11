@@ -35,13 +35,16 @@ const LoadingState = () => (
 );
 
 const rowRenderer = commands => ({ key, index, style }) => {
-  const command = commands[index] || {};
+  const command = commands[index];
+  const exists = !!command;
 
   return (
     <div key={key} style={style}>
-      <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.commandCategory || ALL_CATEGORIES] }}>
-        <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.commandText}
-      </p>
+      {exists &&
+        <p className="dbReplayCommands" style={{ backgroundColor: COMMAND_CATEGORY_COLOURS[command.commandCategory || ALL_CATEGORIES] }}>
+          <span className="dbReplayCommands-timestamp">[{formatTicks(command.tick)}]</span> {command.commandText}
+        </p>}
+      {!exists && <Placeholder>[99:99:99] Inverse: This is a test message!</Placeholder>}
     </div>
   );
 };
@@ -117,7 +120,7 @@ class ReplayCommands extends React.PureComponent {
               onRowsRendered={onRowsRendered}
               ref={registerChild}
               width={width}
-              rowCount={this.props.commands.length}
+              rowCount={999999}
               rowHeight={30}
               rowRenderer={rowRenderer(this.props.commands)}
             />
