@@ -69,14 +69,16 @@ class ReplayDetails extends React.PureComponent {
                 players={replay && replay.players}
                 loading={loading && !replay}
               />
-              <Query query={COMMANDS_FOR_PLAYER} variables={{ playerId }} skip={!playerId}>
-                {({ loading: commandLoading, data: commandData }) => (
+              <Query query={COMMANDS_FOR_PLAYER} variables={{ playerId, first: 25 }} skip={!playerId}>
+                {({ loading: commandLoading, data: commandData, fetchMore }) => (
                   <ReplayCommands
-                    commands={commandData && commandData.commands}
+                    commands={commandData && commandData.commands && commandData.commands.records}
                     players={replay && replay.players}
+                    meta={commandData && commandData.commands && commandData.commands.meta}
                     selected={playerId}
                     onPlayerChanged={this.updateSelectedPlayer}
                     loading={commandLoading || !playerId}
+                    fetchMore={fetchMore}
                   />
                 )}
               </Query>

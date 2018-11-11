@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoSizer, List } from 'react-virtualized';
+import { AutoSizer, InfiniteLoader, List } from 'react-virtualized';
 
 import Wrapper from '../../wrapper/Wrapper';
 import SubHeader from '../../sub-header/SubHeader';
@@ -46,19 +46,34 @@ const rowRenderer = commands => ({ key, index, style }) => {
   );
 };
 
-const CommandList = ({ records }) => (
-  <AutoSizer disableHeight>
-    {({ width }) => (
-      <List
-        height={386}
-        width={width}
-        rowCount={records.length}
-        rowHeight={30}
-        rowRenderer={rowRenderer(records)}
-      />
-    )}
-  </AutoSizer>
-);
+// const CommandList = ({ records }) => (
+//   <AutoSizer disableHeight>
+//     {({ width }) => (
+//       <InfiniteLoader
+//         isRowLoaded={}
+//       >
+//         <List
+//           height={386}
+//           width={width}
+//           rowCount={records.length}
+//           rowHeight={30}
+//           rowRenderer={rowRenderer(records)}
+//         />
+//       </InfiniteLoader>
+//     )}
+//   </AutoSizer>
+// );
+
+const updateQuery = (previousResult, { fetchMoreResult }) => ({
+  commands: {
+    meta: {
+      cursor: fetchMoreResult.commands.meta.cursor,
+      __typename: previousResult.commands.meta.__typename
+    },
+    records: [...previousResult.commands.records, ...fetchMoreResult.commands.records],
+    __typename: previousResult.commands.__typename
+  }
+});
 
 class ReplayCommands extends React.PureComponent {
   state = {
@@ -78,6 +93,40 @@ class ReplayCommands extends React.PureComponent {
 
   onCommandTypeFilterChanged = filter => this.setState({ filter });
 
+  isRowLoaded = ({ index }) => !!this.props.commands[index];
+
+  loadMoreRows = () =>
+    this.props.fetchMore({
+      variables: {
+        cursor: this.props.meta.cursor
+      },
+      updateQuery: updateQuery
+    });
+
+  renderCommandList = () => (
+    <AutoSizer disableHeight>
+      {({ width }) => (
+        <InfiniteLoader
+          isRowLoaded={this.isRowLoaded}
+          loadMoreRows={this.loadMoreRows}
+          rowCount={999999}
+        >
+          {({ onRowsRendered, registerChild }) => (
+            <List
+              height={386}
+              onRowsRendered={onRowsRendered}
+              ref={registerChild}
+              width={width}
+              rowCount={this.props.commands.length}
+              rowHeight={30}
+              rowRenderer={rowRenderer(this.props.commands)}
+            />
+          )}
+        </InfiniteLoader>
+      )}
+    </AutoSizer>
+  );
+
   render = () => (
     <Wrapper paddingTop={25}>
       <SubHeader title="Commands" shadow>
@@ -96,7 +145,7 @@ class ReplayCommands extends React.PureComponent {
       </SubHeader>
       <div className="dbReplayCommands-card dbReplayCommands-cardSmall">
         {(this.props.loading || !this.props.commands) && <LoadingState />}
-        {!this.props.loading && this.props.commands && <CommandList records={this.filteredCommands()} />}
+        {!this.props.loading && this.props.commands && this.renderCommandList()}
       </div>
     </Wrapper>
   );
